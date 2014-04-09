@@ -20,7 +20,23 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "angular",
+    "angular.js",
+    "angularjs",
+    "CoffeeScript",
+    "jade",
+    "stylus",
+    "gulp.js",
+    "gulp",
+    "bootstrap",
+    "angular-strap",
+    "angular-ui-router",
+    "protractor",
+    "karma",
+    "mocha",
+    "heroku",
+    "s3"
   ],
   "dependencies": {
     "yeoman-generator": "~0.16.0",
