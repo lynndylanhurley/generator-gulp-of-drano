@@ -1,0 +1,4 @@
+AWS_KEY:    XXXXXXXXXX
+AWS_SECRET: XXXXXXXXXX
+STATIC_URL: '//s3.amazonaws.com/<%= _.camelize(projectName) %>-production/'
+STATIC_BUCKET_NAME: '<%= _.camelize(projectName) %>-production'

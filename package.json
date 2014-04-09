@@ -1,0 +1,35 @@
+{
+  "name": "generator-gulp-of-drano",
+  "version": "0.0.1",
+  "description": "Yeoman generator for an angular.js site. CoffeeScript, stylus, jade, gulp.js. Bootstrap, angular-strap, nib, angular-ui-router. Protractor, karma, mocha. Heroku + s3 deployment tasks included.",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "lynndylanhurley/generator-gulp-of-drano",
+  "author": {
+    "name": "Lynn Dylan Hurley",
+    "email": "lynn.dylan.hurley+github@gmail.com",
+    "url": "https://github.com/lynndylanhurley"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "~0.16.0",
+    "chalk": "~0.4.0"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0"
+  }
+}
