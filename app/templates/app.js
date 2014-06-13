@@ -3,6 +3,7 @@ var request   = require('request');
 var httpProxy = require('http-proxy');
 var CONFIG    = require('config');
 var s3Policy  = require('./server/s3');
+var sm        = require('sitemap');
 
 var port    = process.env.PORT || 9000;
 var distDir = '/.tmp';
@@ -17,18 +18,44 @@ if (process.env.NODE_ENV) {
   app.use(require('connect-livereload')());
 }
 
+
+// sitemap
+sitemap = sm.createSitemap({
+  hostname: CONFIG.SITE_DOMAIN,
+  cacheTime: 600000,
+  urls: [
+   { url: '/', changefreq: 'monthly', priority: 0.9 }
+  ]
+});
+
+app.get('/sitemap.xml', function(req, res) {
+  sitemap.toXML(function(xml) {
+    res.header('Content-Type', 'application/xml');
+    res.send(xml);
+  });
+});
+
+
 // proxy api requests (for older IE browsers)
 app.all('/proxy/*', function(req, res, next) {
   // transform request URL into remote URL
-  var apiUrl = 'http:'+CONFIG.dbox_api_url+'/'+req.params[0];
+  var apiUrl = 'http:'+CONFIG.API_URL+req.params[0];
+  var r = null;
 
   // preserve GET params
   if (req._parsedUrl.search) {
     apiUrl += req._parsedUrl.search;
   }
 
+  // handle POST / PUT
+  if (req.method === 'POST' || req.method === 'PUT') {
+    r = request[req.method.toLowerCase()]({uri: apiUrl, json: req.body});
+  } else {
+    r = request(apiUrl);
+  }
+
   // pipe request to remote API
-  req.pipe(request(apiUrl)).pipe(res);
+  req.pipe(r).pipe(res);
 });
 
 // provide s3 policy for direct uploads

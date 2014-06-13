@@ -76,6 +76,3 @@ var GulpOfDranoGenerator = yeoman.generators.Base.extend({
 });
 
 module.exports = GulpOfDranoGenerator;
-
-// [ ] capture project name
-// [ ] interpolate project name into template

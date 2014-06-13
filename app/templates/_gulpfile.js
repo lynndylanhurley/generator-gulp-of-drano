@@ -9,6 +9,7 @@ var cached   = require('gulp-cached');
 var es       = require('event-stream');
 var seq      = require('run-sequence');
 var lazypipe = require('lazypipe');
+var nib      = require('nib')
 
 // for deployment
 var env             = (process.env.NODE_ENV || 'development').toLowerCase();
@@ -78,6 +79,7 @@ gulp.task('bower-fonts', function() {
 gulp.task('coffee', function() {
   return gulp.src('app/scripts/**/*.coffee')
     .pipe(cached('coffee'))
+    .pipe($.watch())
     .pipe($.coffee({bare: true}))
     .on('error', function(e) {
       $.util.log(e.toString());
@@ -90,11 +92,11 @@ gulp.task('coffee', function() {
 // Images
 gulp.task('images', function () {
   return gulp.src('app/images/**/*')
-    .pipe($.cache($.imagemin({
-      optimizationLevel: 3,
-      progressive: true,
-      interlaced: true
-    })))
+    //.pipe($.cache($.imagemin({
+      //optimizationLevel: 3,
+      //progressive: true,
+      //interlaced: true
+    //})))
     .pipe(gulp.dest('.tmp/images'))
     .pipe($.size());
 });
@@ -103,12 +105,12 @@ gulp.task('images', function () {
 // Sprites
 gulp.task('sprites', function() {
   return gulp.src('app/images/sprites/**/*.png')
-    .pipe(cached('sprites'))
     .pipe(sprite({
       name:      'sprite.png',
       style:     'sprite.styl',
       cssPath:   '/images',
-      processor: 'stylus'
+      processor: 'stylus',
+      retina:    true
     }))
     .pipe($.if('*.png', gulp.dest('.tmp/images')))
     .pipe($.if('*.styl', gulp.dest('.tmp/styles')))
@@ -118,12 +120,19 @@ gulp.task('sprites', function() {
 // Stylus
 gulp.task('stylus', function() {
   return gulp.src('app/styles/**/*.styl')
-    .pipe(cached('stylus'))
     .pipe($.stylus({
       paths: ['app/styles', '.tmp/styles'],
       //set: ['compress'],
-      use: ['nib'],
-      import: ['nib', 'sprite']
+      use: [nib()],
+      import: [
+        'sprite',
+        'globals/*.styl',
+        'pages/**/*.xs.styl',
+        'pages/**/*.sm.styl',
+        'pages/**/*.md.styl',
+        'pages/**/*.lg.styl',
+        'degrade.styl'
+      ]
     }))
     .on('error', function(e) {
       $.util.log(e.toString());
@@ -139,7 +148,7 @@ gulp.task('clean', function () {
 });
 
 // Transpile
-gulp.task('transpile', ['sass', 'stylus', 'coffee', 'js', 'bowerjs', 'bowercss', 'bower-fonts']);
+gulp.task('transpile', ['stylus', 'coffee', 'js', 'bowerjs', 'bowercss', 'bower-fonts']);
 
 // jade -> html
 var jadeify = lazypipe()
@@ -311,7 +320,8 @@ gulp.task('watch', function () {
   $.nodemon({
     script: 'app.js',
     ext: 'html js',
-    ignore: []
+    ignore: [],
+    watch: []
   })
     .on('restart', function() {
       console.log('restarted');
@@ -344,7 +354,7 @@ gulp.task('watch', function () {
   gulp.watch('app/scripts/**/*.js', ['js']);
 
   // Watch .coffee files
-  gulp.watch('app/scripts/**/*.coffee', ['coffee']);
+  //gulp.watch('app/scripts/**/*.coffee', ['coffee']);
 
   // Watch .jade files
   gulp.watch('app/index.jade', ['base-tmpl'])
@@ -365,6 +375,7 @@ gulp.task('build-dev', function(cb) {
     'clean',
     'sprites',
     'images',
+    'sass',
     'transpile',
     'js-tmpl',
     'base-tmpl',
@@ -397,27 +408,3 @@ gulp.task('deploy', function(cb) {
   }
   seq('build-prod', 'push', cb);
 });
-
-
-// TODO:
-// project/workflow
-// [x] sprites
-// [x] stylus
-// [x] cached
-// [x] config files
-// [x] minify
-// [x] add ref to cdn url in build
-// [x] bust caches
-// [x] s3
-// [x] deploy
-// [x] mocha
-// [x] automatic dependency injection
-// [x] add support server scripts (nodemon?)
-
-// angular
-// [x] routes + root ui-view
-// [x] main controller
-
-// css
-// [x] sticky footer
-// [ ] style guide

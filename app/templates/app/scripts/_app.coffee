@@ -1,4 +1,4 @@
-angular.module('<%= _.camelize(projectName) %>App', [
+angular.module('<%= _.camelize(projectName.toLowerCase()) %>App', [
   'ngSanitize'
   'ui.router'
   'mgcrea.ngStrap'
