@@ -1,4 +1,4 @@
-angular.module('<%= _.camelize(projectName) %>App')
+angular.module('<%= _.camelize(projectName.toLowerCase()) %>App')
   .directive 'scrollTo', ($location, $anchorScroll) ->
     restrict: 'A'
     scope:

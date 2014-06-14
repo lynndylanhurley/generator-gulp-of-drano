@@ -1,4 +1,4 @@
-angular.module('<%= _.camelize(projectName) %>App')
+angular.module('<%= _.camelize(projectName.toLowerCase()) %>App')
   .controller 'StyleGuideCtrl', ($scope) ->
     # Generic content
     $scope.fakeListContent = _.map [0...3], ->

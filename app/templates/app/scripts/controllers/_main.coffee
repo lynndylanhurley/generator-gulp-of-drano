@@ -1,4 +1,4 @@
-angular.module('<%= _.camelize(projectName) %>App')
+angular.module('<%= _.camelize(projectName.toLowerCase()) %>App')
   .controller 'MainCtrl', ($rootScope, $scope, $location, $state, $stateParams, usSpinnerService, $timeout) ->
     # cache element selectors
     $body = $('body')

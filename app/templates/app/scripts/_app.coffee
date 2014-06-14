@@ -3,7 +3,7 @@ angular.module('<%= _.camelize(projectName.toLowerCase()) %>App', [
   'ui.router'
   'mgcrea.ngStrap'
   'angularSpinner'
-  '<%= _.camelize(projectName) %>Partials'
+  '<%= _.camelize(projectName.toLowerCase()) %>Partials'
 ])
   .config ($stateProvider, $urlRouterProvider, $locationProvider, $sceProvider) ->
     # disable sce

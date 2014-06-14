@@ -1,4 +1,4 @@
-angular.module('<%= _.camelize(projectName) %>App')
+angular.module('<%= _.camelize(projectName.toLowerCase()) %>App')
   .controller 'IndexCtrl', ($scope) ->
     console.log 'index'
     $scope.bsTitle = _([0..2])

@@ -77,9 +77,8 @@ gulp.task('bower-fonts', function() {
 
 // CoffeeScript
 gulp.task('coffee', function() {
-  return $.watch({glob: 'app/scripts/**/*.coffee'})
+  return gulp.src('app/scripts/**/*.coffee')
     .pipe(cached('coffee'))
-    .pipe($.watch())
     .pipe($.coffee({bare: true}))
     .on('error', function(e) {
       $.util.log(e.toString());
@@ -119,7 +118,7 @@ gulp.task('sprites', function() {
 
 // Stylus
 gulp.task('stylus', function() {
-  return gulp.src('app/styles/**/*.styl')
+  return gulp.src('app/styles/main.styl')
     .pipe($.stylus({
       paths: ['app/styles', '.tmp/styles'],
       //set: ['compress'],
@@ -188,7 +187,7 @@ gulp.task('js-tmpl', function() {
     .pipe(cached('js-tmpl'))
     .pipe(jadeify())
     .pipe($.ngHtml2js({
-      moduleName: '<%= _.camelize(projectName) %>Partials'
+      moduleName: '<%= _.camelize(projectName.toLowerCase()) %>Partials'
     }))
     .pipe(gulp.dest('.tmp/views'));
 });
