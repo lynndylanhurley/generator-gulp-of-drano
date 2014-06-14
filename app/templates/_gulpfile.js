@@ -77,7 +77,7 @@ gulp.task('bower-fonts', function() {
 
 // CoffeeScript
 gulp.task('coffee', function() {
-  return gulp.src('app/scripts/**/*.coffee')
+  return $.watch({glob: 'app/scripts/**/*.coffee'})
     .pipe(cached('coffee'))
     .pipe($.watch())
     .pipe($.coffee({bare: true}))
@@ -354,7 +354,7 @@ gulp.task('watch', function () {
   gulp.watch('app/scripts/**/*.js', ['js']);
 
   // Watch .coffee files
-  //gulp.watch('app/scripts/**/*.coffee', ['coffee']);
+  gulp.watch('app/scripts/**/*.coffee', ['coffee']);
 
   // Watch .jade files
   gulp.watch('app/index.jade', ['base-tmpl'])
