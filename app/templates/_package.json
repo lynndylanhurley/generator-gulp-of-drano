@@ -50,7 +50,8 @@
     "lazypipe": "~0.2.1",
     "gulp-frep": "~0.1.1",
     "gulp-cached": "0.0.3",
-    "coffee-script": "~1.7.1"
+    "coffee-script": "~1.7.1",
+    "gaze": "0.5.1"
   },
   "engines": {
     "node": ">=0.10.0"
