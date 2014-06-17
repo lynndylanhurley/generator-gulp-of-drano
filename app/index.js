@@ -34,11 +34,12 @@ var GulpOfDranoGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'projectName',
-      message: 'What would you like to name this website?',
+      message: 'What is the title of this website?',
+      default: "Krystal Enterprises, Ltd."
     }, {
       name: 'siteUrl',
       message: 'What will be the domain of this site at launch?',
-      default: 'example.com'
+      default: 'krystal-enterprises.biz'
     }];
 
 
