@@ -48,7 +48,7 @@ var GulpOfDranoGenerator = yeoman.generators.Base.extend({
 
 
     this.prompt(prompts, function (props) {
-      this.projectName = props.projectName;
+      this.projectName = props.projectName.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
       this.siteUrl = props.siteUrl;
       this.devPort = props.devPort;
 
