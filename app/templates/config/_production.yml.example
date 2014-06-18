@@ -1,6 +1,6 @@
 AWS_KEY:            XXXXXXXXXX
 AWS_SECRET:         XXXXXXXXXX
-STATIC_URL:         '//s3.amazonaws.com/<%= _.camelize(projectName) %>-production/'
-STATIC_BUCKET_NAME: '<%= _.camelize(projectName) %>-production'
-SITE_DOMAIN:        'example.com'
-API_URL:            '//api.example.com/'
+STATIC_URL:         '//s3.amazonaws.com/<%= _.dasherize(projectName.toLowerCase()) %>-production/'
+STATIC_BUCKET_NAME: '<%= _.dasherize(projectName.toLowerCase()) %>-production'
+SITE_DOMAIN:        '<%= siteUrl %>'
+API_URL:            '//api.<%= siteUrl %>/'
