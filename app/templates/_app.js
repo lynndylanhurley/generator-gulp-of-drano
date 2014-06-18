@@ -5,7 +5,7 @@ var CONFIG    = require('config');
 var s3Policy  = require('./server/s3');
 var sm        = require('sitemap');
 
-var port    = process.env.PORT || 9000;
+var port    = process.env.PORT || <%= devPort %>;
 var distDir = '/.tmp';
 var app     = express();
 

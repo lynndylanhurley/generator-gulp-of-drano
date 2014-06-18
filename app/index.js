@@ -40,12 +40,17 @@ var GulpOfDranoGenerator = yeoman.generators.Base.extend({
       name: 'siteUrl',
       message: 'What will be the domain of this site at launch?',
       default: 'krystal-enterprises.biz'
+    }, {
+      name: 'devPort',
+      message: 'What port would you like to use for development?',
+      default: '9000'
     }];
 
 
     this.prompt(prompts, function (props) {
       this.projectName = props.projectName;
       this.siteUrl = props.siteUrl;
+      this.devPort = props.devPort;
 
       done();
     }.bind(this));

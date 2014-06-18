@@ -44,7 +44,7 @@ This app uses the following:
 ### Development
 
 #### Start Dev Server
-`gulp dev` - broadcast dev server to [localhost:9000](http://localhost:9000). use livereload for automatic refresh.
+`gulp dev` - broadcast dev server to [localhost:<%= devPort %>](http://localhost:<%= devPort %>). use livereload for automatic refresh.
 
 ---
 
