@@ -282,7 +282,7 @@ gulp.task('s3', function() {
 // Push to heroku
 gulp.task('push', $.shell.task([
   'git checkout -b '+tag,
-  'cp -R dist '+DIST_DIR,
+  'cp -R dist/ '+DIST_DIR,
   'git add -u .',
   'git add .',
   'git commit -am "commit for '+tag+' push"',
