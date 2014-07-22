@@ -1,0 +1,5 @@
+--require chai
+--reporter nyan
+--ui tdd
+--watch
+--compilers coffee:coffee-script/register
