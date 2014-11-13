@@ -33,7 +33,6 @@ The generated app will include the following:
 
 #### Libraries
 * [bootstrap](http://getbootstrap.com/)
-* [nib](http://visionmedia.github.io/nib/)
 * [jquery](http://jquery.com/)
 * [angularjs](http://angularjs.org/)
 * [angular-ui router](https://github.com/angular-ui/ui-router)
