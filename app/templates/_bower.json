@@ -1,5 +1,5 @@
 {
-  "name": "dbx-ui-site",
+  "name": "<%= projectName %>",
   "private": true,
   "dependencies": {
     "jquery-legacy": "jquery#1.11.1",
