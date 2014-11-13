@@ -1,5 +1,5 @@
 {
-  "name": "<%= projectName %>",
+  "name": "<%= _.dasherize(projectName).toLowerCase() %>",
   "version": "0.0.0",
   "dependencies": {
     "config": "^1.7.0",

@@ -1,5 +1,5 @@
 {
-  "name": "<%= projectName %>",
+  "name": "<%= _.dasherize(projectName).toLowerCase() %>",
   "private": true,
   "dependencies": {
     "jquery-legacy": "jquery#1.11.1",

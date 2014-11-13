@@ -1,10 +1,9 @@
 util   = require("util")
 path   = require("path")
-yeoman = require("yeoman-generator")
 yosay  = require('yosay')
 chalk  = require("chalk")
 
-GulpOfDranoGenerator = yeoman.generators.Base.extend(
+module.exports =
   initializing: ->
     @pkg = require("../package.json")
     @on "end", ->
@@ -24,21 +23,17 @@ GulpOfDranoGenerator = yeoman.generators.Base.extend(
     )
 
     prompts = [
-      {
-        name: "projectName"
-        message: "What is the title of this website?"
-        default: "Krystal Enterprises, Ltd."
-      }
-      {
-        name: "siteUrl"
-        message: "What will be the domain of this site at launch?"
-        default: "krystal-enterprises.biz"
-      }
-      {
-        name: "devPort"
-        message: "What port would you like to use for development?"
-        default: "9000"
-      }
+      name: "projectName"
+      message: "What is the title of this website?"
+      default: "Krystal Enterprises Ltd"
+    ,
+      name: "siteUrl"
+      message: "What will be the domain of this site at launch?"
+      default: "krystal-enterprises.biz"
+    ,
+      name: "devPort"
+      message: "What port would you like to use for development?"
+      default: "9000"
     ]
 
     @prompt prompts, ((props) ->
@@ -50,10 +45,11 @@ GulpOfDranoGenerator = yeoman.generators.Base.extend(
 
     ).bind(this)
 
-  app: ->
-    @_processDirectory "./", "./"
 
-  writing: (source, destination) ->
+  writing: ->
+    source = './'
+    destination = './'
+
     root  = (if @isPathAbsolute(source) then source else path.join(@sourceRoot(), source))
     files = @expandFiles("**",
       dot: true
@@ -79,5 +75,3 @@ GulpOfDranoGenerator = yeoman.generators.Base.extend(
       npm: true
       callback: ->
         console.log "your black eyes the blackest of eyes"
-)
-module.exports = GulpOfDranoGenerator
