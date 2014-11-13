@@ -1,10 +1,11 @@
 util   = require("util")
 path   = require("path")
 yeoman = require("yeoman-generator")
+yosay  = require('yosay')
 chalk  = require("chalk")
 
 GulpOfDranoGenerator = yeoman.generators.Base.extend(
-  init: ->
+  initializing: ->
     @pkg = require("../package.json")
     @on "end", ->
       unless @options["skip-install"]
@@ -14,14 +15,13 @@ GulpOfDranoGenerator = yeoman.generators.Base.extend(
           callback: ->
             console.log "Everything is ready!"
 
-  askFor: ->
+  prompting: ->
     done = @async()
 
     # have Yeoman greet the user
-    @log @yeoman
-
-    # replace it with a short and sweet description of your generator
-    @log chalk.magenta("You're using the fantastic GulpOfDrano generator.")
+    @log yosay(
+      "scoop a grave from the sky where it's roomy to lie."
+    )
 
     prompts = [
       {
@@ -53,7 +53,7 @@ GulpOfDranoGenerator = yeoman.generators.Base.extend(
   app: ->
     @_processDirectory "./", "./"
 
-  _processDirectory: (source, destination) ->
+  writing: (source, destination) ->
     root  = (if @isPathAbsolute(source) then source else path.join(@sourceRoot(), source))
     files = @expandFiles("**",
       dot: true
@@ -69,7 +69,15 @@ GulpOfDranoGenerator = yeoman.generators.Base.extend(
         @template src, dest
       else
         dest = path.join(destination, f)
-        @copy src, dest
+        @src.copy src, dest
+
       i++
+
+  end: ->
+    @installDependencies
+      bower: true
+      npm: true
+      callback: ->
+        console.log "your black eyes the blackest of eyes"
 )
 module.exports = GulpOfDranoGenerator

@@ -17,22 +17,26 @@ angular.module('<%= _.camelize(projectName.toLowerCase()) %>App', [
     $urlRouterProvider.otherwise('/404')
 
     # fix bug with spy cache
-
     $stateProvider
       .state 'index',
         url: '/'
-        templateUrl: 'index.html'
+        templateUrl: 'views/index.html'
+        controller: 'IndexCtrl'
+
+      .state 'index',
+        url: ''
+        templateUrl: 'views/index.html'
         controller: 'IndexCtrl'
 
       .state '404',
         url: '/404'
-        templateUrl: '404.html'
+        templateUrl: 'views/404.html'
 
       .state 'style-guide',
         url: '/style-guide'
-        templateUrl: 'style-guide.html'
+        templateUrl: 'views/style-guide.html'
         controller: 'StyleGuideCtrl'
 
       .state 'terms',
         url: '/terms'
-        templateUrl: 'terms.html'
+        templateUrl: 'views/terms.html'

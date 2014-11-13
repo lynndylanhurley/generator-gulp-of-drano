@@ -1,2 +1,2 @@
-SITE_DOMAIN: 'example.com'
-API_URL: '//api.example.dev/'
+SITE_DOMAIN:  '_.dasherize(projectName.toLowerCase()) %>.dev'
+API_URL:      '//api._.dasherize(projectName.toLowerCase()) %>.dev/'

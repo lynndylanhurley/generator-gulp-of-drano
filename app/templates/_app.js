@@ -1,21 +1,22 @@
-var express   = require('express');
-var request   = require('request');
-var httpProxy = require('http-proxy');
-var CONFIG    = require('config');
-var s3Policy  = require('./server/s3');
-var sm        = require('sitemap');
+var express    = require('express');
+var request    = require('request');
+var httpProxy  = require('http-proxy');
+var CONFIG     = require('config');
+var handlebars = require('express-handlebars');
+var s3Policy   = require('./server/s3');
+var sm         = require('sitemap');
 
 var port    = process.env.PORT || <%= devPort %>;
-var distDir = '/.tmp';
 var app     = express();
 
-
 // env setup
-// TODO: comment this better
-if (process.env.NODE_ENV) {
-  distDir = '/dist-'+process.env.NODE_ENV.toLowerCase();
-} else {
+if (process.env.NODE_ENV === 'development') {
   app.use(require('connect-livereload')());
+  require('protractor-ci').initRecorder();
+}
+
+if (!process.env.DIST_DIR) {
+  process.env.DIST_DIR = 'dist-' + process.env.NODE_ENV
 }
 
 
@@ -84,7 +85,7 @@ app.get('/policy/:fname', function(req, res) {
 
 // redirect to push state url (i.e. /blog -> /#/blog)
 app.get(/^(\/[^#\.]+)$/, function(req, res) {
-  var path = req.route.params[0]
+  var path = req.url
 
   // preserve GET params
   if (req._parsedUrl.search) {
@@ -94,6 +95,17 @@ app.get(/^(\/[^#\.]+)$/, function(req, res) {
   res.redirect('/#'+path);
 });
 
+app.get('/', function(req, res) {
+  res.render('index', {
+    domain: req.headers.host.split(':')[0].split('.')[0],
+    layout: false
+  });
+});
 
-app.use(express.static(__dirname + distDir));
+// use handlebar templates for html files
+app.engine('.html', handlebars({extname: '.html'}))
+app.set('views', __dirname + '/' + process.env.DIST_DIR)
+app.set('view engine', '.html')
+
+app.use(express.static(__dirname + '/' + process.env.DIST_DIR));
 app.listen(port);
