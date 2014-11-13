@@ -133,7 +133,7 @@ processJSTemplates = lazypipe()
   .pipe(-> $.cached('js-tmpl'))
   .pipe(-> $.jade())
   .pipe(-> $.ngHtml2js({
-    moduleName: '<%= _.camelize(projectName.toLowerCase()) %>dbxUiPartials'
+    moduleName: '<%= _.camelize(projectName.toLowerCase()) %>Partials'
   }))
   .pipe(-> $.remember('js-tmpl'))
   .pipe(-> jsTmplFilter.restore())
