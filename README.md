@@ -43,7 +43,7 @@ The generated app will include the following:
 #### Testing
 * [karma](http://karma-runner.github.io/0.12/index.html)
 * [protractor](https://github.com/angular/protractor)
-* [mocha](http://visionmedia.github.io/mocha/)
+* [mocha](http://mochajs.org/)
 * [chai](http://chaijs.com/guide/installation/)
 * [sinon](http://sinonjs.org/)
 
